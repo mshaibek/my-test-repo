@@ -1,6 +1,7 @@
 FROM centos:centos7
 LABEL description="This is website created for docker class"
-
+RUN yum update -y
+RUN yum install awscli
 COPY bin/ /usr/local/bin
 
 CMD aws-kms-create-key

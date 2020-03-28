@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Usage:
+# aws-create-kms-key [ <keyname> ]
+#	Creates an aws KMS key. If <keyname> is not specified the name "secretskey" is used.
+#
+
+set -e
+
+kmsKeyName=${1:-"secretskey"}
+
+if [ ! $(aws kms describe-key --key-id alias/${kmsKeyName} --query 'KeyMetadata.Arn' 2>/dev/null) ]
+then
+	kmsKeyArn=$(aws kms create-key --tags TagKey=Purpose,TagValue=KeyForSecrets --description "KMS key for secrets" --query "KeyMetadata.Arn" --output text)
+	aws kms create-alias --alias-name alias/${kmsKeyName} --target-key-id "${kmsKeyArn}"
+else
+	echo "the key ${kmsKeyName} already exists"
+fi
+
+

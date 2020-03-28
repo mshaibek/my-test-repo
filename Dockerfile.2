@@ -1,0 +1,6 @@
+FROM centos:centos7
+LABEL description="This is website created for docker class"
+
+COPY bin/ /usr/local/bin
+
+CMD ["sleep 600"]

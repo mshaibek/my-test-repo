@@ -1,0 +1,7 @@
+FROM centos:centos7
+LABEL description="This is website created for docker class"
+RUN yum update -y
+RUN yum install awscli -y
+COPY bin/ /usr/local/bin
+ENV AWS_DEFAULT_REGION=us-east-1
+CMD aws-kms-create-key

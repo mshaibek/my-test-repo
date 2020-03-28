@@ -5,7 +5,7 @@
 #	Creates an aws KMS key. If <keyname> is not specified the name "secretskey" is used.
 #
 
-set -x
+set -e
 
 kmsKeyName=${1:-"secretskey"}
 

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+    - "8080:80"
+    volumes:
+    - 312composevolume:/usr/share/nginx/html/
+  db:
+    image: mysql
+volumes:
+  312composevolume: {}
